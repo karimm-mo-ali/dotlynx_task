@@ -26,7 +26,8 @@ To get started with this project, follow these steps:
 
 ## Publishing APK
 
-https://drive.google.com/file/d/1K_iCdAnXXUJ1zmoRyXHkcwKCiGVyCNJ4/view?usp=share_link
+https://drive.google.com/file/d/1bckCDGnC5CBqubyIBACe_nImrhfXmBZu/view?usp=share_link
+
 
 
 ## Design Decisions
