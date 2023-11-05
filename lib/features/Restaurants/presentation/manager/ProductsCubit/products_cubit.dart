@@ -9,20 +9,17 @@ class GetProductsCubit extends Cubit<GetProductsState> {
 
   RestaurantsRepoImpl restaurantsRepoImpl = RestaurantsRepoImpl();
   static GetProductsCubit get(context) => BlocProvider.of(context);
-  ProductsModel? productsModel;
-  bool isLoadingMore = false;
 
-  Future getProducts({int? page = 1}) async {
-    if (page == 1) {
-      emit(GetProductsLoading());
-    } else {
-      isLoadingMore = true;
+  Future<void> getProducts() async {
+    emit(GetProductsLoading());
+    ProductsModel? productsModel = await restaurantsRepoImpl.getProducts(
+      onError: (errMsg) {
+        emit(GetProductsFailure(errMsg));
+      },
+    );
+
+    if (productsModel != null) {
+      emit(GetProductsSuccess(productsModel));
     }
-    productsModel = await restaurantsRepoImpl.getProducts().then((value) {
-      isLoadingMore = false;
-      return value;
-    });
-
-    emit(GetProductsSuccess(productsModel!));
   }
 }

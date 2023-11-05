@@ -9,20 +9,17 @@ class GetCategoriesCubit extends Cubit<GetCategoriesState> {
 
   RestaurantsRepoImpl restaurantsRepoImpl = RestaurantsRepoImpl();
   static GetCategoriesCubit get(context) => BlocProvider.of(context);
-  CategoriesModel? categoriesModel;
-  bool isLoadingMore = false;
 
-  Future getCategories({int? page = 1}) async {
-    if (page == 1) {
-      emit(GetCategoriesLoading());
-    } else {
-      isLoadingMore = true;
+  Future<void> getCategories() async {
+    emit(GetCategoriesLoading());
+    CategoriesModel? categoriesModel = await restaurantsRepoImpl.getCategories(
+      onError: (errMsg) {
+        emit(GetCategoriesFailure(errMsg));
+      },
+    );
+
+    if (categoriesModel != null) {
+      emit(GetCategoriesSuccess(categoriesModel));
     }
-    categoriesModel = await restaurantsRepoImpl.getCategories().then((value) {
-      isLoadingMore = false;
-      return value;
-    });
-
-    emit(GetCategoriesSuccess(categoriesModel!));
   }
 }

@@ -1,17 +1,17 @@
 class RestaurantsModel {
   int? ack;
   int? count;
-  List<Stores>? stores;
+  List<Restaurants>? restaurants;
 
-  RestaurantsModel({this.ack, this.count, this.stores});
+  RestaurantsModel({this.ack, this.count, this.restaurants});
 
   RestaurantsModel.fromJson(Map<String, dynamic> json) {
     ack = json['ack'];
     count = json['count'];
     if (json['stores'] != null) {
-      stores = <Stores>[];
+      restaurants = <Restaurants>[];
       json['stores'].forEach((v) {
-        stores!.add(Stores.fromJson(v));
+        restaurants!.add(Restaurants.fromJson(v));
       });
     }
   }
@@ -20,14 +20,14 @@ class RestaurantsModel {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['ack'] = ack;
     data['count'] = count;
-    if (stores != null) {
-      data['stores'] = stores!.map((v) => v.toJson()).toList();
+    if (restaurants != null) {
+      data['stores'] = restaurants!.map((v) => v.toJson()).toList();
     }
     return data;
   }
 }
 
-class Stores {
+class Restaurants {
   String? createdAt;
   String? updatedAt;
   int? id;
@@ -61,7 +61,7 @@ class Stores {
   List<StoresLocales>? storesLocales;
   List? discountsAndOfferRelations;
 
-  Stores(
+  Restaurants(
       {this.createdAt,
       this.updatedAt,
       this.id,
@@ -95,7 +95,7 @@ class Stores {
       this.storesLocales,
       this.discountsAndOfferRelations});
 
-  Stores.fromJson(Map<String, dynamic> json) {
+  Restaurants.fromJson(Map<String, dynamic> json) {
     createdAt = json['createdAt'];
     updatedAt = json['updatedAt'];
     id = json['id'];

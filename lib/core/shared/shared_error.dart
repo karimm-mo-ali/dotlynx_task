@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../config/routes.dart';
 import '../constants/assets.dart';
 import '../constants/styles.dart';
+import '../helpers/helper_methods.dart';
 
 showErrorDialog(String error) {
   if (error.isNotEmpty) {
@@ -27,14 +28,13 @@ class DialogFb2 extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return Dialog(
       elevation: 1,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(36)),
       child: Container(
         width: MediaQuery.of(context).size.width,
         height: 280,
-        padding: EdgeInsets.symmetric(horizontal: size.width * 0.077),
+        padding: EdgeInsets.symmetric(horizontal: setWidth(context, 0.077)),
         decoration: kDialogBoxDecoration,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

@@ -7,6 +7,7 @@ import 'core/config/routes.dart';
 import 'core/constants/colors.dart';
 import 'core/constants/strings.dart';
 import 'core/cubits/bloc_observer.dart';
+import 'core/utils/api/general_api_request.dart';
 import 'features/Restaurants/presentation/manager/CategoriesCubit/categories_cubit.dart';
 import 'features/Restaurants/presentation/manager/ProductsCubit/products_cubit.dart';
 import 'features/Restaurants/presentation/manager/RestaurantsCubit/restaurants_cubit.dart';
@@ -16,8 +17,7 @@ GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  // await SharedPrefs().init();
-  // ApiService().init();
+  ApiService().init();
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
 
@@ -72,5 +72,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-// FlutterStatusbarcolor.setStatusBarWhiteForeground(true);

@@ -2,20 +2,15 @@ import 'dart:developer';
 
 class AppResponseModel {
   dynamic data;
-  String? message;
-  int status;
-  dynamic errors;
+  String? msg;
 
   AppResponseModel({
     required this.data,
-    this.message,
-    required this.status,
-    required this.errors,
+    this.msg,
   });
 
   factory AppResponseModel.fromMap(Map<dynamic, dynamic> map) {
     String errorMessage = '';
-    String msg = '';
     try {
       if (map['errors'] != null) {
         if (map['errors'] is String) {
@@ -33,23 +28,22 @@ class AppResponseModel {
       }
     } catch (_) {}
 
-    try {
-      if (map['message'] != null) {
-        msg = map['message'].toString();
-      } else if (map['message'] is Map) {
-        map['message'].forEach((key, value) {
-          if (key == 'message') {
-            msg += value.toString();
-          }
-        });
-        log('msg. $msg');
-      }
-    } catch (_) {}
+    // try {
+    //   if (map['message'] != null) {
+    //     msg = map['message'].toString();
+    //   } else if (map['message'] is Map) {
+    //     map['message'].forEach((key, value) {
+    //       if (key == 'message') {
+    //         msg += value.toString();
+    //       }
+    //     });
+    //     log('msg. $msg');
+    //   }
+    // } catch (_) {}
 
     return AppResponseModel(
-        data: map['data'],
-        message: msg,
-        errors: errorMessage,
-        status: map['status']);
+      data: map['data'],
+      msg: errorMessage,
+    );
   }
 }

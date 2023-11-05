@@ -37,7 +37,7 @@ class Products {
   String? slug;
   String? availabilityStartTime;
   String? availabilityEndTime;
-  double? price;
+  dynamic price;
   int? salePrice;
   String? uomData;
   int? stockQuantity;

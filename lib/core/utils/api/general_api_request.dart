@@ -61,9 +61,8 @@ class ApiService {
           connectivityResult == ConnectivityResult.wifi ||
           internetConnectionChecker) {
         var headers = {
-          "x-api-key": "baladi_dev_pX2Rldl9LSFlVSVM3TDN4YTA3ZHNmZ2R5V0E4ZE1S"
+          "x-api-key": "baladi_dev_pX2Rldl9LSFlVSVM3TDN4YTA3ZHNmZ2R5V0E4ZE1S",
         };
-
         Response response = await _dio.request<T>(
           endPoint,
           data: isFormData ? FormData.fromMap(data ?? {}) : data,
@@ -91,11 +90,11 @@ class ApiService {
               response.statusCode! <= 400) {
             successMessage("Success");
           }
-          if (appResponseModel.errors != null &&
+          if (appResponseModel.msg != null &&
               response.statusCode! >= 400 &&
               backEndError != null) {
             log('message00000000000000000');
-            backEndError(appResponseModel.message.toString());
+            backEndError(appResponseModel.msg.toString());
           }
           return appResponseModel.data;
         } else {
@@ -139,19 +138,15 @@ class ApiService {
             }
           }
 
-          // backEnd Error
           if (backEndError != null) {
-            log(e.response!.data['errors'].toString());
             backEndError(msg);
             showErrorDialog(msg);
           } else {
             showErrorDialog(msg);
           }
         } else {
-          // unknown error { server down - internet error }
           if (unKnownError != null) {
-            unKnownError(e.response.toString());
-            showErrorDialog(e.response.toString());
+            unKnownError(kExceptionMessage);
           } else {
             if (backEndError != null) {
               backEndError(kExceptionMessage);
@@ -166,7 +161,7 @@ class ApiService {
           backEndError(kErrorOccurredMessage);
         } else {
           if (e.response != null) {
-            showErrorDialog(e.response!.data['errors']);
+            showErrorDialog(kExceptionMessage);
           }
         }
       }
