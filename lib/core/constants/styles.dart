@@ -31,7 +31,7 @@ const kTextFieldHintStyle = TextStyle(
   fontSize: 19,
   fontFamily: appFontFamily,
   fontWeight: FontWeight.w400,
-  height: 0.08,
+  height: 0.0,
   letterSpacing: -0.17,
 );
 
